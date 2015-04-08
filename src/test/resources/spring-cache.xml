@@ -7,7 +7,7 @@
      http://www.springframework.org/schema/cache 
      http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <cache:annotation-driven />
+    <cache:annotation-driven cache-manager="cacheManager"/>
     <context:component-scan base-package="org.oyach.spring.cache"/>
 
     <!-- generic cache manager -->
@@ -16,12 +16,8 @@
         <property name="caches">
             <set>
                 <bean
-                        class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
+                        class="org.oyach.spring.cache.TairCache"
                         p:name="default" />
-
-                <bean
-                        class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"
-                        p:name="userCache" />
             </set>
         </property>
     </bean>

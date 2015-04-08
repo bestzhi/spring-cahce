@@ -12,15 +12,15 @@ import org.springframework.cache.annotation.Cacheable;
  */
 public interface UserService {
 
-    @Cacheable(value = "userCache")
+    @Cacheable(value = "default", key = "#id",condition = "#id > 1")
     User getUser(long id);
 
-    @Cacheable(value = "userCache")
+    @Cacheable(value = {"userCache", "userCache2"})
     User getUserByIdAndUsername(long id, String name);
 
-    @CachePut(value = "userCache", key = "#user.id")
+    @CachePut(value = {"userCache", "userCache2"}, key = "#user.id")
     User updateUser(User user);
 
-    @CacheEvict(value = "userCache")
+    @CacheEvict(value = {"userCache", "userCache2"})
     boolean deleteUser(long id);
 }
